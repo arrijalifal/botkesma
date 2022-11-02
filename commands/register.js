@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { Deta } = require('deta');
 const wait = require('node:timers/promises').setTimeout;
+let spreadsheet = require('../spreadsheet/spreadsheet.js');
 require('dotenv/config');
 
 const deta = Deta(process.env.DETA_PROJECT_KEY);
@@ -15,19 +16,17 @@ module.exports = {
                 .setDescription('Input NRP anda!')
                 .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(interaction, message) {
         const nrp = interaction.options.getString('nrp');
         await interaction.deferReply({ephemeral: true});
-        try {
-            // await db.insert({}, );
-            await interaction.editReply('akun anda telah terdaftar!');
-            await interaction.followUp({ content: `Halo anak bajingan ${nrp}!`, ephemeral: true });
+        await spreadsheet.authService();
+        const name = await spreadsheet.getName(nrp);
+        if (name) {
+            await interaction.editReply(`Akun anda telah terdaftar atas nama ${name}`);
+            console.log(interaction.member.user.toString());
         }
-        catch (error) {
-
+        else {
+            await interaction.editReply('Nama anda tidak ada di dalam database!');
         }
-        await wait(2000);
-        const message = await interaction.fetchReply();
-        console.log(message);
     }
 }
