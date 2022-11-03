@@ -14,7 +14,6 @@ module.exports = {
 
         try {
             await command.execute(interaction);
-            console.log('tereksekusi');
         }
         catch (error) {
             console.error(error);

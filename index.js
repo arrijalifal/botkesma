@@ -33,6 +33,9 @@ for (const file of eventFiles) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
+        // client.on('interactionCreate', interaction => {
+        //     interaction.member.user
+        // }) 
 	}
 }
 

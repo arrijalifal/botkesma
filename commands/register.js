@@ -22,8 +22,14 @@ module.exports = {
         await spreadsheet.authService();
         const name = await spreadsheet.getName(nrp);
         if (name) {
+            try {
+                db.insert({"account": interaction.member.user.tag, "name": name}, nrp);
+            }
+            catch (error) {
+                
+            }
             await interaction.editReply(`Akun anda telah terdaftar atas nama ${name}`);
-            console.log(interaction.member.user.toString());
+            console.log(interaction.member.user.tag);
         }
         else {
             await interaction.editReply('Nama anda tidak ada di dalam database!');
