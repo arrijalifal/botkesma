@@ -16,23 +16,24 @@ module.exports = {
                 .setDescription('Input NRP anda!')
                 .setRequired(true)
         ),
-    async execute(interaction, message) {
+    async execute(interaction) {
         const nrp = interaction.options.getString('nrp');
-        await interaction.deferReply({ephemeral: true});
+        await interaction.deferReply({ ephemeral: true });
         await spreadsheet.authService();
         const name = await spreadsheet.getName(nrp);
+        const isNRP = await db.get(nrp);
         if (name) {
-            try {
-                db.insert({"account": interaction.member.user.tag, "name": name}, nrp);
+            if (isNRP) {
+                console.log(isNRP);
+            } else {
+                await db.put({'name': name.trim(), 'account': interaction.member.user.tag, 'user_id': interaction.member.user.id})
+                await interaction.editReply(`Akun anda telah terdaftar atas nama ${name} dengan username ${interaction.member.user}`);
+                console.log(interaction.member.user.id);
             }
-            catch (error) {
-                
-            }
-            await interaction.editReply(`Akun anda telah terdaftar atas nama ${name}`);
-            console.log(interaction.member.user.tag);
+            // interaction.editReply('Akun anda telah terdaftar!');
         }
         else {
-            await interaction.editReply('Nama anda tidak ada di dalam database!');
+            await interaction.editReply('Anda bukan mahasiswa Teknik Komputer! Hubungi admin untuk informasi lebih lanjut.');
         }
     }
 }
