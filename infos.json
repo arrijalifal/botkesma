@@ -1,0 +1,40 @@
+{
+    "akademik": [
+        {
+            "jadwal kuliah": [
+                "libur",
+                "masuk",
+                "jadwal ETS/EAS",
+                "pembayaran UKT",
+                "pengisian FRS",
+                "pengisian IPD",
+                "kalender akademik"
+            ]
+        },
+        {
+            "arsip soal": [
+                ""
+            ]
+        },
+        "TEFL",
+        "OTP",
+        "dari ITS",
+        {
+            "TA": [
+                "Modul proposal",
+                "ketersediaan topik dari dosen",
+                "jadwal seminar"
+            ]
+        },
+        {
+            "infografis Magang": [
+                "ketersediaan Loker",
+                "administrasi persiapan magang jurusan"
+            ]
+        }
+    ],
+    "finansial": [
+        "beasiswa",
+        "UKT"
+    ]
+}
