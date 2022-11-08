@@ -26,7 +26,7 @@ module.exports = {
             if (isNRP) {
                 console.log(isNRP);
             } else {
-                await db.put({'name': name.trim(), 'account': interaction.member.user.tag, 'user_id': interaction.member.user.id}, nrp);
+                await db.put({'name': name.trim(), 'account': interaction.member.user.tag, 'nrp': nrp}, interaction.member.user.id);
                 await interaction.editReply(`Akun anda telah terdaftar atas nama ${name} dengan username ${interaction.member.user}`);
                 console.log(interaction.member.user.id);
             }

@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon index.js",
-    "start:sheet": "nodemon ./spreadsheet/spreadsheet.js",
-    "pm2": "pm2 start index.js"
+    "start:sheet": "nodemon ./spreadsheet/spreadsheet.js"
   },
   "keywords": [],
   "author": "",

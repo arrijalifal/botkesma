@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const spreadsheet = require('../spreadsheet/spreadsheet.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,6 +16,11 @@ module.exports = {
                 .setDescription('Kumpulan informasi beasiswa')
         ),
     async execute(interaction) {
-        
+        switch (interaction.options.getSubcommand()) {
+            case 'magang':
+                interaction.reply('ini magang');
+            case 'beasiswa':
+                interaction.reply('ini beasiswa');
+        }
     }
 }
