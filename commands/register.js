@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { Deta } = require('deta');
-const wait = require('node:timers/promises').setTimeout;
+// const wait = require('node:timers/promises').setTimeout;
 let spreadsheet = require('../spreadsheet/spreadsheet.js');
 require('dotenv/config');
 
