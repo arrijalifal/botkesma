@@ -1,6 +1,8 @@
-const { Events } = require('discord.js');
+const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const spreadsheet = require('../spreadsheet/spreadsheet.js');
-
+const { Deta } = require('deta');
+const deta = Deta(process.env.DETA_PROJECT_KEY);
+const db = deta.Base('BotKesma');
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -9,7 +11,18 @@ module.exports = {
             if (interaction.customId === 'pilihinfo') {
                 switch (interaction.values[0]) {
                     case 'info_magang':
-                        await interaction.editReply('info magang');
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId('info_beasiswa_lanjut')
+                                    .setLabel("Lihat lebih lanjut >>")
+                                    .setStyle(ButtonStyle.Primary)
+                            );
+                        const embed = new EmbedBuilder()
+                            .setColor(0x0099FF)
+                            .setTitle("Beasiswa Terdekat Saat Ini")
+                            .setDescription("Nggak ada wkwkwk");
+                        await interaction.reply({ content: "", ephemeral: true, embeds: [embed], components: [row] });
                         break;
                     case 'info_beasiswa':
                         await interaction.reply('info beasiswa');
@@ -18,6 +31,8 @@ module.exports = {
             }
         }
         else if (interaction.isChatInputCommand()) {
+
+
             console.log(interaction);
 
             const command = interaction.client.commands.get(interaction.commandName);
@@ -28,7 +43,17 @@ module.exports = {
             }
 
             try {
-                await command.execute(interaction);
+                if (interaction.commandName == 'register') {
+                    command.execute(interaction);
+                }
+                else {
+                    const dcUser = await db.get(interaction.member.user.id);
+                    if (dcUser)
+                        await command.execute(interaction);
+                    else
+                        interaction.reply({ content: 'Akun anda belum terdaftar!', ephemeral: true });
+
+                }
             }
             catch (error) {
                 console.error(error);
