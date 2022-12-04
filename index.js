@@ -15,11 +15,24 @@ for (const file of commandFiles) {
 
     if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command);
+        console.log(command.data);
         console.log('BERHASIL ANJINGG!!!!');
     }
     else {
         console.error('pembacaan command error cuk!');
     }
+}
+
+client.customId = new Collection();
+
+const customIdPath = path.join(__dirname, 'custom_id');
+const customIdFiles = fs.readdirSync(customIdPath).filter(file => file.endsWith('.js'));
+
+for (const file of customIdFiles) {
+    const filePath = path.join(customIdPath, file);
+    const custom_id = require(filePath);
+    console.log(custom_id.data);
+    client.customId.set(custom_id.data.name, custom_id);
 }
 
 const eventsPath = path.join(__dirname, 'events');
@@ -32,9 +45,6 @@ for (const file of eventFiles) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
-        // client.on('interactionCreate', interaction => {
-        //     interaction.member.user
-        // }) 
 	}
 }
 
