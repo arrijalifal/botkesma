@@ -1,6 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Id } = require('discord.js');
 
 module.exports = {
+    data: 'pilihinfo',
     async execute(interaction) {
         switch (interaction.values[0]) {
             case 'info_magang':

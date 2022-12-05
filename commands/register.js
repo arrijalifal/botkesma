@@ -21,14 +21,14 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
         await spreadsheet.authService();
         const name = await spreadsheet.getName(nrp);
-        const isNRP = await db.get(nrp);
+        const isRegistered = await db.get(interaction.member.user.id);
         if (name) {
-            if (isNRP) {
-                console.log(isNRP);
+            if (isRegistered) {
+                // console.log(isNRP);
+                await interaction.editReply('Tidak perlu mendaftar ulang. Akun anda sudah disimpan ke dalam database!');
             } else {
                 await db.put({'name': name.trim(), 'account': interaction.member.user.tag, 'nrp': nrp}, interaction.member.user.id);
                 await interaction.editReply(`Akun anda telah terdaftar atas nama ${name} dengan username ${interaction.member.user}`);
-                console.log(interaction.member.user.id);
             }
             // interaction.editReply('Akun anda telah terdaftar!');
         }

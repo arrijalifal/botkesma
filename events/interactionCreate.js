@@ -1,4 +1,4 @@
-const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
 const spreadsheet = require('../spreadsheet/spreadsheet.js');
 const path = require('node:path');
 const { Deta } = require('deta');
@@ -9,7 +9,7 @@ const db = deta.Base('BotKesma');
 
 module.exports = {
     name: Events.InteractionCreate,
-    async execute(interaction, ) {
+    async execute(interaction) {
 
         if (interaction.isSelectMenu()) {
             const custom_id = interaction.client.customId.get(interaction.customId);
@@ -21,7 +21,6 @@ module.exports = {
             }
         }
         else if (interaction.isChatInputCommand()) {
-            // console.log(interaction);
             const command = interaction.client.commands.get(interaction.commandName);
 
             if (!command) {

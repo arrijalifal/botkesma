@@ -15,7 +15,6 @@ for (const file of commandFiles) {
 
     if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command);
-        console.log(command.data);
         console.log('BERHASIL ANJINGG!!!!');
     }
     else {
@@ -31,8 +30,7 @@ const customIdFiles = fs.readdirSync(customIdPath).filter(file => file.endsWith(
 for (const file of customIdFiles) {
     const filePath = path.join(customIdPath, file);
     const custom_id = require(filePath);
-    console.log(custom_id.data);
-    client.customId.set(custom_id.data.name, custom_id);
+    client.customId.set(custom_id.data, custom_id);
 }
 
 const eventsPath = path.join(__dirname, 'events');

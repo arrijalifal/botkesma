@@ -1,6 +1,7 @@
 const { ActionRowBuilder, EmbedBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = {
+    data: 'info_magang',
     async execute(interaction) {
         const row = new ActionRowBuilder()
             .addComponents(
