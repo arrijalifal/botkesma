@@ -1,4 +1,4 @@
-const { ActionRowBuilder, EmbedBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 
 module.exports = {
     data: 'info_magang',

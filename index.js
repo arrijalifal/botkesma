@@ -33,6 +33,17 @@ for (const file of customIdFiles) {
     client.customId.set(custom_id.data, custom_id);
 }
 
+client.values = new Collection();
+
+const valuesPath = path.join(__dirname, 'value_options');
+const valuesFiles = fs.readdirSync(valuesPath).filter(file => file.endsWith('.js'));
+
+for (const file of valuesFiles) {
+    const filePath = path.join(valuesPath, file);
+    const value_option = require(filePath);
+    client.values.set(value_option.data, value_option);
+}
+
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
