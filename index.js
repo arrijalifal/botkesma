@@ -1,6 +1,7 @@
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
+const spreadsheet = require('./spreadsheet/spreadsheet.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 require('dotenv/config');
 
@@ -8,6 +9,10 @@ client.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+async function mainSpreadsheet() {
+    spreadsheet.authService();
+}
 
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
@@ -56,5 +61,5 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
-
+mainSpreadsheet();
 client.login(process.env.TOKEN);

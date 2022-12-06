@@ -24,6 +24,6 @@ module.exports = {
                         }
                     )
             );
-        await interaction.reply({ content: 'Silahkan pilih salah satu info melalui menu dropdown dibawah!', components: [row] });
+        await interaction.reply({ content: 'Silahkan pilih salah satu info melalui menu dropdown dibawah!', components: [row], ephemeral: true });
     }
 }

@@ -12,7 +12,7 @@ module.exports = {
             );
         const embed = new EmbedBuilder()
             .setColor(0x0099FF)
-            .setTitle("Beasiswa Terdekat Saat Ini")
+            .setTitle("Magang Terdekat Saat Ini")
             .setDescription("Nggak ada wkwkwk");
         await interaction.reply({ content: "", ephemeral: true, embeds: [embed], components: [row] });
     }

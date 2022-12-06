@@ -19,7 +19,7 @@ module.exports = {
     async execute(interaction) {
         const nrp = interaction.options.getString('nrp');
         await interaction.deferReply({ ephemeral: true });
-        await spreadsheet.authService();
+        // await spreadsheet.authService();
         const name = await spreadsheet.getName(nrp);
         const isRegistered = await db.get(interaction.member.user.id);
         if (name) {
