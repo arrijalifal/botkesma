@@ -14,12 +14,10 @@ module.exports = {
                     .addOptions(
                         {
                             label: 'Magang',
-                            // description: 'Informasi seputar magang',
                             value: 'info_magang',
                         },
                         {
                             label: 'Beasiswa',
-                            // description: 'Informasi seputar beasiswa',
                             value: 'info_beasiswa'
                         }
                     )
