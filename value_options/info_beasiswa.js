@@ -8,9 +8,9 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId('info_beasiswa_lanjut')
-                    .setLabel('Lihat lebih lanjut >>')
-                    .setStyle(ButtonStyle.Primary)
+                    .setURL('https://docs.google.com/spreadsheets/d/1ljcr31wke6w-vSKVtxg2V_Va0ru4zxo4WWenaWNk47Q/edit#gid=0')
+                    .setLabel('Lihat lebih lanjut')
+                    .setStyle(ButtonStyle.Link)
             );
         const databeasiswa = await spreadsheet.infoBeasiswa(0);
         let infobeasiswa = 'Nama Beasiswa : ';
