@@ -9,13 +9,18 @@ async function authService() {
     });
 }
 
-async function getName(nrp) {
+async function getData(nrp) {
     await doc.loadInfo();
     const sheet = doc.sheetsByIndex[0];
     rows = await sheet.getRows();
     for (x of rows) {
         if (x.nrp.trim() === nrp) {
-            return x.name;
+            let data = {
+                name: x.name,
+                nrp: x.nrp,
+                semester: x.semester,
+            }
+            return data;
         };
     }
     return false;
@@ -25,12 +30,6 @@ async function infoBeasiswa(index) {
     await doc.loadInfo();
     const info = await doc.sheetsByTitle['Info Beasiswa'];
     const rows = await info.getRows();
-    // console.log(rows[0].pendaftaran);
-    // for (let i = 0; i <= info.columnCount; i++) {
-    //     if (rows[i].pendaftaran) {
-    //         console.log(`yang ada datanya : ${rows[i].nama_beasiswa}`);
-    //     }
-    // }
     let data = {
         'nama_beasiswa': rows[index].nama_beasiswa,
         'sumber': rows[index].sumber,
@@ -45,5 +44,5 @@ async function infoBeasiswa(index) {
 }
 
 module.exports = {
-    authService, getName, infoBeasiswa,
+    authService, getData, infoBeasiswa,
 }

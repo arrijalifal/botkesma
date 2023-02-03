@@ -12,7 +12,7 @@ module.exports = {
                     .setLabel('Lihat lebih lanjut')
                     .setStyle(ButtonStyle.Link)
             );
-        const databeasiswa = await spreadsheet.infoBeasiswa(0);
+        const databeasiswa = await spreadsheet.infoBeasiswa(1);
         let infobeasiswa = 'Nama Beasiswa : ';
         infobeasiswa += databeasiswa.nama_beasiswa + '\n';
         infobeasiswa += 'Persyaratan :\n';
