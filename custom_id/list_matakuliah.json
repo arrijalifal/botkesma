@@ -1,0 +1,58 @@
+{
+    "semester_1": [
+        {
+            "mata_kuliah": "Aljabar Linear",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Dasar Pemrograman",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Fisika Mekanika",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Kalkulus 1",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Pengantar Teknologi Elektro",
+            "sks": 2
+        },
+        {
+            "mata_kuliah": "Probabilitas dan Statistik",
+            "sks": 3
+        }
+    ],
+    "semester_2": [
+        {
+            "mata_kuliah": "Desain Dan Rekayasa Sistem",
+            "sks": 2
+        },
+        {
+            "mata_kuliah": "Fisika Listrik Dan Magnet",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Kalkulus 2",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Matematika Diskrit",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Metode Numerik",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Pemrograman Lanjut",
+            "sks": 3
+        },
+        {
+            "mata_kuliah": "Rangkaian Listrik",
+            "sks": 2
+        }
+    ]
+}

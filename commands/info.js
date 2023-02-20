@@ -6,7 +6,6 @@ module.exports = {
         .setName('info')
         .setDescription('Kumpulan berbagai info'),
     async execute(interaction) {
-        const semester = null;
         const row = new ActionRowBuilder()
             .addComponents(
                 new SelectMenuBuilder()
@@ -20,6 +19,10 @@ module.exports = {
                         {
                             label: 'Beasiswa',
                             value: 'info_beasiswa'
+                        },
+                        {
+                            label: 'Mata Kuliah',
+                            value: 'mata_kuliah_semester'
                         }
                     )
             );

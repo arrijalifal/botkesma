@@ -20,7 +20,7 @@ for (const file of commandFiles) {
 
     if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command);
-        console.log('BERHASIL ANJINGG!!!!');
+        console.log('BERHASIL');
     }
     else {
         console.error('pembacaan command error cuk!');
