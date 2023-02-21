@@ -3,7 +3,6 @@ const deta = Deta(process.env.DETA_PROJECT_KEY);
 const db = deta.Base('BotKesma');
 const db2 = deta.Base('Terdaftar');
 require('dotenv/config');
-// const spreadsheet = require('../spreadsheet/spreadsheet.js');
 
 async function isRegistered(data, which) {
     switch (which) {
@@ -17,9 +16,6 @@ async function isRegistered(data, which) {
             if (ketemu.count != 0) return true;
             return false
     }
-    // console.log(data);
-    // if ((which == 1)? await db.get(data) : await db.fetch({"nrp": data})) return true;
-    // return false;
 }
 
 async function saveName(data, key) {
