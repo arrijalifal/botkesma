@@ -5,7 +5,7 @@ const spreadsheet = require('./spreadsheet/spreadsheet.js');
 require('dotenv/config');
 
 async function mainSpreadsheet() {
-    spreadsheet.authService();
+    await spreadsheet.authService();
 }
 
 loadfiles.commands();
