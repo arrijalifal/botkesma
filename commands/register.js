@@ -27,7 +27,8 @@ module.exports = {
                     account: interaction.member.user.tag,
                     nrp: nrp,
                 };
-                if (await detabase.isRegistered(data, 2)) {
+                let ketemu = await detabase.isRegistered(data.name, 2);
+                if (ketemu) {
                     await interaction.editReply('Mohon maaf, NRP anda telah terdaftar di akun discord yang lain. silakan hubungi admin untuk lebih lanjut.', );
                 }
                 else {
