@@ -16,20 +16,24 @@ module.exports = {
         const nrp = interaction.options.getString('nrp');
         await interaction.deferReply({ ephemeral: true });
         const cData = await spreadsheet.getData(nrp);
-        const isRegistered = await detabase.isRegistered(interaction.member.user.id);
+        const isRegistered = await detabase.isRegistered(interaction.member.user.id, 1);
         if (cData) {
             if (isRegistered) {
                 // console.log(isNRP);
                 await interaction.editReply('Tidak perlu mendaftar ulang. Akun anda sudah disimpan ke dalam database!');
             } else {
                 let data = {
-                    'name': cData.name,
-                    'account': interaction.member.user.tag,
-                    'nrp': nrp, 
-                    'semester': cData.semester,
+                    name: cData.name,
+                    account: interaction.member.user.tag,
+                    nrp: nrp,
                 };
-                await detabase.saveName(data, interaction.member.user.id);
-                await interaction.editReply(`Akun anda telah terdaftar atas nama ${cData.name} dengan username ${interaction.member.user}`);
+                if (await detabase.isRegistered(data, 2)) {
+                    await interaction.editReply('Mohon maaf, NRP anda telah terdaftar di akun discord yang lain. silakan hubungi admin untuk lebih lanjut.', );
+                }
+                else {
+                    await detabase.saveName(data, interaction.member.user.id);
+                    await interaction.editReply(`Akun anda telah terdaftar atas nama ${cData.name} dengan username ${interaction.member.user}`);
+                }
             }
             // interaction.editReply('Akun anda telah terdaftar!');
         }

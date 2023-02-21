@@ -34,7 +34,7 @@ module.exports = {
                     if (dcUser)
                         await command.execute(interaction);
                     else
-                        interaction.reply({ content: 'Akun anda belum terdaftar!', ephemeral: true });
+                        interaction.reply({ content: 'Akun anda belum terdaftar. Silakan gunakan command /register untuk mendaftarkan akun discord anda!', ephemeral: true });
 
                 }
             }
