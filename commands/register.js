@@ -19,7 +19,7 @@ module.exports = {
         const isRegistered = await detabase.isRegistered(interaction.member.user.id, 1);
         if (cData) {
             if (isRegistered) {
-                // console.log(isNRP);
+                await detabase.accessTime(interaction.member.user.id);
                 await interaction.editReply('Tidak perlu mendaftar ulang. Akun anda sudah disimpan ke dalam database!');
             } else {
                 let data = {
@@ -32,6 +32,7 @@ module.exports = {
                     await interaction.editReply('Mohon maaf, NRP anda telah terdaftar di akun discord yang lain. silakan hubungi admin untuk lebih lanjut.', );
                 }
                 else {
+                    await detabase.accessTime(interaction.member.user.id);
                     await detabase.saveName(data, interaction.member.user.id);
                     await interaction.editReply(`Akun anda telah terdaftar atas nama ${cData.name} dengan username ${interaction.member.user}`);
                 }

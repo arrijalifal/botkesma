@@ -1,7 +1,7 @@
 const { Deta } = require('deta');
 const deta = Deta(process.env.DETA_PROJECT_KEY);
 const db = deta.Base('BotKesma');
-const db2 = deta.Base('Terdaftar');
+const ac = deta.Base('Akses');
 require('dotenv/config');
 
 async function isRegistered(data, which) {
@@ -11,7 +11,7 @@ async function isRegistered(data, which) {
             return false;
         case 2:
             console.log(data);
-            let ketemu = await db.fetch({'name': data});
+            let ketemu = await db.fetch({ 'name': data });
             // console.log(ketemu);
             if (ketemu.count != 0) return true;
             return false
@@ -25,6 +25,29 @@ async function saveName(data, key) {
     }
 }
 
+async function accessTime(user_id) {
+    const tgl = new Date(Date.now());
+    let day = tgl.getDate();
+    let month = tgl.getMonth() + 1;
+    let year = tgl.getFullYear();
+
+    let fullTanggal = `${day}_${(month < 10) ? `0${month}` : `${month}`}_${year}`
+    let sekarang = await ac.get(fullTanggal);
+    if (sekarang) {
+        let listuser = sekarang.user_accessed;
+        if (!listuser.includes(user_id)) {
+            const update = {
+                user_accessed: ac.util.append(user_id),
+                total: ac.util.increment(),
+            }
+            ac.update(update, fullTanggal);
+        }
+    }
+    else {
+        await ac.put({ user_accessed: [user_id], total: 1 }, fullTanggal);
+    }
+}
+
 module.exports = {
-    isRegistered, saveName,
+    isRegistered, saveName, accessTime
 }
