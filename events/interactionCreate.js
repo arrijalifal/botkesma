@@ -13,6 +13,10 @@ module.exports = {
                 await interaction.reply({ content: 'There was an error', ephemeral: true });
             }
         }
+        else if (interaction.isModalSubmit()) {
+            const custom_id = interaction.client.customId.get(interaction.customId);
+            custom_id.execute(interaction);
+        }
         else if (interaction.isChatInputCommand()) {
             const command = interaction.client.commands.get(interaction.commandName);
 
