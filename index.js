@@ -1,7 +1,5 @@
-// const { Client, GatewayIntentBits } = require('discord.js');
 const loadfiles = require('./loadfiles.js');
 const spreadsheet = require('./spreadsheet/spreadsheet.js');
-// const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 require('dotenv/config');
 
 async function mainSpreadsheet() {
