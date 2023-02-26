@@ -26,10 +26,12 @@ async function saveName(data, key) {
 }
 
 async function accessTime(user_id) {
-    const tgl = new Date(Date.now());
-    let day = tgl.getDate();
-    let month = tgl.getMonth() + 1;
-    let year = tgl.getFullYear();
+    const tgl = new Date().toLocaleDateString('id-ID', {
+        timeZone: 'Asia/Jakarta'
+    }).split("/");
+    let day = tgl[0];
+    let month = Number(tgl[1]);
+    let year = tgl[2];
 
     let fullTanggal = `${day}_${(month < 10) ? `0${month}` : `${month}`}_${year}`
     let sekarang = await ac.get(fullTanggal);
