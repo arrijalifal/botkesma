@@ -12,7 +12,6 @@ async function isRegistered(data, which) {
         case 2:
             console.log(data);
             let ketemu = await db.fetch({ 'name': data });
-            // console.log(ketemu);
             if (ketemu.count != 0) return true;
             return false
     }
@@ -50,22 +49,6 @@ async function accessTime(user_id) {
     }
 }
 
-async function feedbackCollector(feedbackData, user_id) {
-    const data = {
-        user_id: user_id,
-        feedback: feedbackData,
-    };
-    if (!await ac.get('feedback')) {
-        await ac.put({feedbacks: [data]}, 'feedback');
-    }
-    else {
-        let update = {
-            feedbacks: ac.util.append(data),
-        }
-        await ac.update(update, 'feedback');
-    }
-}
-
 module.exports = {
-    isRegistered, saveName, accessTime, feedbackCollector,
+    isRegistered, saveName, accessTime,
 }

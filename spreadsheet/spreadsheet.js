@@ -32,6 +32,15 @@ async function getData(nrp) {
     return false;
 }
 
+async function saveFeedback(user_id, feedbackData) {
+    await doc.loadInfo();
+    const dateNow = new Date(Date.now()).toLocaleString('en-GB', {
+        timeZone: "Asia/Jakarta",
+    });
+    const feedbackSheet = await doc.sheetsByIndex[1];
+    feedbackSheet.addRow({timestamp: dateNow, user_id: user_id, feedback: feedbackData});
+}
+
 async function infoBeasiswa(index) {
     await doc.loadInfo();
     const info = await doc.sheetsByTitle['Info Beasiswa'];
@@ -68,5 +77,5 @@ async function matkul_semester(semester) {
 }
 
 module.exports = {
-    authService, getData, infoBeasiswa, matkul_semester,
+    authService, getData, infoBeasiswa, matkul_semester, saveFeedback,
 }
