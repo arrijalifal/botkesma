@@ -40,8 +40,8 @@ module.exports = {
                 }
             }
             catch (error) {
-                console.error(error);
-                await interaction.reply({ content: 'There was an error', ephemeral: true });
+                // console.error(error);
+                await interaction.reply({ content: 'Mohon maaf, bot tidak dapat diakses melalui private message!', ephemeral: true });
             }
         }
     },

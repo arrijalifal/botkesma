@@ -1,6 +1,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const authacc = require('../config/botkesma-6cbc1f4e42d2.json');
 const doc = new GoogleSpreadsheet('1bqZNr58HWQ3lz9bClu9zCmwruRmV2nPGeQE7Po0ssak');
+const doc2 = new GoogleSpreadsheet('1oZphBlnsIIA6WlV_oLE7DTYdZ60q4heaKX9ba55kIPE');
 const matkulsheets = new GoogleSpreadsheet('1N94WySVxXRisbGnuxvTT6Vq34lnA5iSFNkMXHDn_Zpg');
 
 async function authService() {
@@ -9,6 +10,10 @@ async function authService() {
         private_key: authacc.private_key
     });
     await matkulsheets.useServiceAccountAuth({
+        client_email: authacc.client_email,
+        private_key: authacc.private_key
+    });
+    await doc2.useServiceAccountAuth({
         client_email: authacc.client_email,
         private_key: authacc.private_key
     });
@@ -41,21 +46,26 @@ async function saveFeedback(user_id, feedbackData) {
     feedbackSheet.addRow({timestamp: dateNow, user_id: user_id, feedback: feedbackData});
 }
 
-async function infoBeasiswa(index) {
-    await doc.loadInfo();
-    const info = await doc.sheetsByTitle['Info Beasiswa'];
+async function infoBeasiswa() {
+    const date = Math.floor(new Date(Date.now()).getTime() / 1000);
+    await doc2.loadInfo();
+    const info = await doc2.sheetsByTitle['Beasiswa'];
     const rows = await info.getRows();
-    let data = {
-        'nama_beasiswa': rows[index].nama_beasiswa,
-        'sumber': rows[index].sumber,
-        'benefit': rows[index].benefit,
-        'pendaftaran': rows[index].pendaftaran,
-        'deadline': rows[index].deadline,
-        'persyaratan': rows[index].persyaratan,
-        'link_postingan': rows[index].link_postingan,
-        'cara_mendaftar': rows[index].cara_mendaftar,
-    };
-    return data;
+    console.log(`rows: \n\n${rows}\n\n==========`);
+    let beasiswaData = [];
+    for (x of rows) {
+        if (x.nama_beasiswa == undefined) break;
+        console.log(`===${x.nama_beasiswa}===${x.pendaftaran}`);
+        let pendaftaran = x.pendaftaran;
+        let [day, month, year] = pendaftaran.split('/')
+        let waktuPendaftaran = Math.floor(new Date(year, month - 1, day).getTime() / 1000);
+        console.log(`waktu pendaftaran = ${waktuPendaftaran}`);
+        if (beasiswaData.length < 5 && waktuPendaftaran >= date) {
+            beasiswaData.push(x);
+        }
+    }
+    console.log(beasiswaData);
+    return beasiswaData;
 }
 
 async function matkul_semester(semester) {
