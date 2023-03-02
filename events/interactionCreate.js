@@ -25,7 +25,7 @@ module.exports = {
             }
 
             try {
-                if (interaction.commandName == 'register') {
+                if (interaction.commandName == 'register' && interaction.member.user.id) {
                     command.execute(interaction);
                 }
                 else {
